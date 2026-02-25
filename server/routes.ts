@@ -64,5 +64,28 @@ export async function registerRoutes(
     res.json({ success: true });
   });
 
+  app.post("/api/track", async (req, res) => {
+    const ip = req.headers["x-forwarded-for"]?.toString().split(",")[0] || req.socket.remoteAddress || "unknown";
+    const userAgent = req.headers["user-agent"] || null;
+    const path = req.body.path || "/";
+    await storage.recordVisit(ip, userAgent, path);
+    res.json({ success: true });
+  });
+
+  app.post("/api/admin/login", async (req, res) => {
+    const { password } = req.body;
+    if (password === process.env.ADMIN_PASSWORD) {
+      res.json({ success: true });
+    } else {
+      res.status(401).json({ message: "Invalid password" });
+    }
+  });
+
+  app.get("/api/admin/visitors", async (_req, res) => {
+    const total = await storage.getTotalVisitors();
+    const uniqueToday = await storage.getUniqueVisitorsToday();
+    res.json({ total, uniqueToday });
+  });
+
   return httpServer;
 }

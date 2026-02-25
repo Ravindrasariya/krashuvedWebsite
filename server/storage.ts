@@ -2,9 +2,9 @@ import {
   type User, type InsertUser,
   type Banner, type InsertBanner,
   type Testimonial, type InsertTestimonial,
-  users, banners, testimonials
+  users, banners, testimonials, visitors
 } from "@shared/schema";
-import { eq, asc } from "drizzle-orm";
+import { eq, asc, sql, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 
@@ -24,6 +24,10 @@ export interface IStorage {
   createTestimonial(testimonial: InsertTestimonial): Promise<Testimonial>;
   updateTestimonial(id: number, testimonial: Partial<InsertTestimonial>): Promise<Testimonial | undefined>;
   deleteTestimonial(id: number): Promise<boolean>;
+
+  recordVisit(ipAddress: string, userAgent: string | null, path: string): Promise<void>;
+  getTotalVisitors(): Promise<number>;
+  getUniqueVisitorsToday(): Promise<number>;
 }
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -91,6 +95,25 @@ export class DatabaseStorage implements IStorage {
   async deleteTestimonial(id: number): Promise<boolean> {
     const result = await db.delete(testimonials).where(eq(testimonials.id, id)).returning();
     return result.length > 0;
+  }
+
+  async recordVisit(ipAddress: string, userAgent: string | null, path: string): Promise<void> {
+    await db.insert(visitors).values({ ipAddress, userAgent, path });
+  }
+
+  async getTotalVisitors(): Promise<number> {
+    const [result] = await db.select({ count: sql<number>`count(*)::int` }).from(visitors);
+    return result?.count ?? 0;
+  }
+
+  async getUniqueVisitorsToday(): Promise<number> {
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const [result] = await db
+      .select({ count: sql<number>`count(distinct ${visitors.ipAddress})::int` })
+      .from(visitors)
+      .where(gte(visitors.visitedAt, todayStart));
+    return result?.count ?? 0;
   }
 }
 

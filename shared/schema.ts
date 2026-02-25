@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, integer, boolean, serial } from "drizzle-orm/pg-core";
+import { pgTable, text, varchar, integer, boolean, serial, timestamp } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -28,6 +28,14 @@ export const testimonials = pgTable("testimonials", {
   descriptionHi: text("description_hi").notNull(),
   photoUrl: text("photo_url"),
   active: boolean("active").notNull().default(true),
+});
+
+export const visitors = pgTable("visitors", {
+  id: serial("id").primaryKey(),
+  ipAddress: text("ip_address").notNull(),
+  userAgent: text("user_agent"),
+  path: text("path").notNull(),
+  visitedAt: timestamp("visited_at").notNull().defaultNow(),
 });
 
 export const insertUserSchema = createInsertSchema(users).pick({

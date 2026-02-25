@@ -28,7 +28,7 @@ export default function Footer() {
 
           <div className="flex flex-wrap items-center gap-x-6 gap-y-1 text-sm">
             <span className="flex items-center gap-1.5 text-background/70">
-              <Phone className="w-3.5 h-3.5 text-primary" data-testid="text-footer-phone" />+91 98765 43210
+              <Phone className="w-3.5 h-3.5 text-primary" data-testid="text-footer-phone" />+91 888 258 9392
             </span>
             <span className="flex items-center gap-1.5 text-background/70">
               <Mail className="w-3.5 h-3.5 text-primary" data-testid="text-footer-email" />info@krashuved.com

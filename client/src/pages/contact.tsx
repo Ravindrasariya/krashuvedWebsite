@@ -21,7 +21,7 @@ export default function Contact() {
             <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">
               <Phone className="w-5 h-5 text-primary" />
             </div>
-            <span className="text-sm">+91 98765 43210</span>
+            <span className="text-sm">+91 888 258 9392</span>
           </div>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-md bg-primary/10 flex items-center justify-center">

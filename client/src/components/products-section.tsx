@@ -1,6 +1,7 @@
 import { useLanguage } from "@/lib/language-context";
 import { Badge } from "@/components/ui/badge";
-import { Monitor, Users, TrendingUp, ShoppingBag, Sprout } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Monitor, Users, TrendingUp, ShoppingBag, Sprout, ExternalLink } from "lucide-react";
 
 const products = [
   {
@@ -14,6 +15,7 @@ const products = [
     image: "/images/product-csm.png",
     icon: Monitor,
     comingSoon: false,
+    link: "https://csm.krashuved.com/",
   },
   {
     id: "mandi",
@@ -26,6 +28,7 @@ const products = [
     image: "/images/product-mandi.png",
     icon: Users,
     comingSoon: false,
+    link: "https://mm.krashuved.com/",
   },
   {
     id: "vyappar",
@@ -38,6 +41,7 @@ const products = [
     image: "/images/product-vyappar.png",
     icon: TrendingUp,
     comingSoon: false,
+    link: "https://vv.krashuved.com/",
   },
   {
     id: "pesticide",
@@ -50,6 +54,7 @@ const products = [
     image: "/images/product-pesticide.png",
     icon: ShoppingBag,
     comingSoon: true,
+    link: null,
   },
   {
     id: "farmer",
@@ -62,6 +67,7 @@ const products = [
     image: "/images/product-farmer.png",
     icon: Sprout,
     comingSoon: true,
+    link: null,
   },
 ];
 
@@ -100,21 +106,38 @@ export default function ProductsSection() {
                 data-testid={`product-card-${product.id}`}
               >
                 <div className="w-full lg:w-1/2">
-                  <div className="relative rounded-md overflow-hidden group">
-                    <img
-                      src={product.image}
-                      alt={product.nameEn}
-                      className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    {product.comingSoon && (
-                      <div className="absolute top-4 right-4">
-                        <Badge variant="default" className="text-sm px-3 py-1">
-                          {t("Coming Soon", "\u091C\u0932\u094D\u0926 \u0906 \u0930\u0939\u093E \u0939\u0948")}
-                        </Badge>
+                  {product.link ? (
+                    <a href={product.link} target="_blank" rel="noopener noreferrer" className="block" data-testid={`link-product-image-${product.id}`}>
+                      <div className="relative rounded-md overflow-hidden group cursor-pointer">
+                        <img
+                          src={product.image}
+                          alt={product.nameEn}
+                          className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                          <span className="bg-white/90 text-foreground px-4 py-2 rounded-md text-sm font-medium flex items-center gap-1.5">
+                            {t("Visit", "\u0926\u0947\u0916\u0947\u0902")} <ExternalLink className="w-3.5 h-3.5" />
+                          </span>
+                        </div>
                       </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
+                    </a>
+                  ) : (
+                    <div className="relative rounded-md overflow-hidden group">
+                      <img
+                        src={product.image}
+                        alt={product.nameEn}
+                        className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      {product.comingSoon && (
+                        <div className="absolute top-4 right-4">
+                          <Badge variant="default" className="text-sm px-3 py-1">
+                            {t("Coming Soon", "\u091C\u0932\u094D\u0926 \u0906 \u0930\u0939\u093E \u0939\u0948")}
+                          </Badge>
+                        </div>
+                      )}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                  )}
                 </div>
 
                 <div className="w-full lg:w-1/2 space-y-4">
@@ -135,13 +158,22 @@ export default function ProductsSection() {
                   >
                     {t(product.descEn, product.descHi)}
                   </p>
-                  {!product.comingSoon && (
+                  {product.link ? (
+                    <div className="pt-2">
+                      <a href={product.link} target="_blank" rel="noopener noreferrer" data-testid={`link-product-visit-${product.id}`}>
+                        <Button variant="default" className="gap-2">
+                          {t("Try Now", "\u0905\u092D\u0940 \u0906\u091C\u093C\u092E\u093E\u090F\u0902")}
+                          <ExternalLink className="w-4 h-4" />
+                        </Button>
+                      </a>
+                    </div>
+                  ) : product.comingSoon ? (
                     <div className="pt-2">
                       <Badge variant="outline" className="text-sm">
-                        {t("Available Now", "\u0905\u092D\u0940 \u0909\u092A\u0932\u092C\u094D\u0927")}
+                        {t("Coming Soon", "\u091C\u0932\u094D\u0926 \u0906 \u0930\u0939\u093E \u0939\u0948")}
                       </Badge>
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </div>
             );
