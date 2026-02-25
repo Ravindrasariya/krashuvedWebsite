@@ -3,7 +3,6 @@ import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import { useLanguage } from "@/lib/language-context";
 import { useToast } from "@/hooks/use-toast";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -59,9 +58,6 @@ export default function Contact() {
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF9800]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge variant="secondary" className="mb-6 text-xs tracking-wider uppercase px-4 py-1.5">
-            {t("Contact Us", "\u0938\u0902\u092A\u0930\u094D\u0915 \u0915\u0930\u0947\u0902")}
-          </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
             {t("Get In ", "\u0938\u0902\u092A\u0930\u094D\u0915 ")}
             <span className="relative inline-block">

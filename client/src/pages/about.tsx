@@ -1,5 +1,4 @@
 import { useLanguage } from "@/lib/language-context";
-import { Badge } from "@/components/ui/badge";
 import { Eye, Target, Layers, Users, BarChart3, Wallet, Quote } from "lucide-react";
 
 export default function About() {
@@ -52,9 +51,6 @@ export default function About() {
         <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF9800]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Badge variant="secondary" className="mb-6 text-xs tracking-wider uppercase px-4 py-1.5">
-            {t("About Us", "\u0939\u092E\u093E\u0930\u0947 \u092C\u093E\u0930\u0947 \u092E\u0947\u0902")}
-          </Badge>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight" data-testid="text-about-title">
             {t("Who ", "\u0939\u092E ")}
             <span className="relative inline-block">
@@ -121,9 +117,6 @@ export default function About() {
       <section className="py-20 sm:py-24 bg-muted/20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
-            <Badge variant="secondary" className="mb-4 text-xs tracking-wider uppercase px-4 py-1.5">
-              {t("Why KrashuVed", "\u0915\u094D\u092F\u094B\u0902 KrashuVed")}
-            </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" data-testid="text-difference-title">
               {t("The KrashuVed Difference", "KrashuVed \u0915\u093E \u0905\u0902\u0924\u0930")}
             </h2>

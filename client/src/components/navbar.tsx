@@ -21,7 +21,7 @@ export default function Navbar() {
   return (
     <nav className="sticky top-0 z-50 bg-background/95 backdrop-blur-md border-b border-border" data-testid="navbar">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between gap-4 h-16">
+        <div className="flex items-center justify-between gap-2 h-16">
           <Link href="/" data-testid="link-home-logo">
             <div className="flex items-center gap-2.5 cursor-pointer">
               <img src={logoImg} alt="KrashuVed" className="w-10 h-10 object-contain" />
@@ -39,7 +39,7 @@ export default function Navbar() {
             </div>
           </Link>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1 whitespace-nowrap">
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span

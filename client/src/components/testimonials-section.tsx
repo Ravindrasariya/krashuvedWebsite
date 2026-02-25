@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/lib/language-context";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -38,9 +37,6 @@ export default function TestimonialsSection() {
     <section className="py-16 sm:py-20 bg-card" data-testid="testimonials-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <Badge variant="secondary" className="mb-4">
-            {t("Testimonials", "\u092A\u094D\u0930\u0936\u0902\u0938\u093E\u092A\u0924\u094D\u0930")}
-          </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-testimonials-title">
             {t("What Our Users Say", "\u0939\u092E\u093E\u0930\u0947 \u0909\u092A\u092F\u094B\u0917\u0915\u0930\u094D\u0924\u093E \u0915\u094D\u092F\u093E \u0915\u0939\u0924\u0947 \u0939\u0948\u0902")}
           </h2>

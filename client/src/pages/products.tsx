@@ -6,19 +6,27 @@ export default function Products() {
 
   return (
     <div data-testid="page-products">
-      <div className="bg-primary/5 py-16 sm:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
-            {t("Our Products", "\u0939\u092E\u093E\u0930\u0947 \u0909\u0924\u094D\u092A\u093E\u0926")}
+      <section className="relative py-20 sm:py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/8 via-background to-[#FF9800]/8" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#4CAF50]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF9800]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
+            {t("Our ", "हमारे ")}
+            <span className="relative inline-block">
+              {t("Products", "उत्पाद")}
+              <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#4CAF50] to-[#FF9800]" />
+            </span>
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
             {t(
               "Technology solutions designed for every stakeholder in the agricultural value chain.",
-              "\u0915\u0943\u0937\u093F \u092E\u0942\u0932\u094D\u092F \u0936\u094D\u0930\u0943\u0902\u0916\u0932\u093E \u092E\u0947\u0902 \u092A\u094D\u0930\u0924\u094D\u092F\u0947\u0915 \u0939\u093F\u0924\u0927\u093E\u0930\u0915 \u0915\u0947 \u0932\u093F\u090F \u0921\u093F\u091C\u093C\u093E\u0907\u0928 \u0915\u093F\u090F \u0917\u090F \u092A\u094D\u0930\u094C\u0926\u094D\u092F\u094B\u0917\u093F\u0915\u0940 \u0938\u092E\u093E\u0927\u093E\u0928\u0964"
+              "कृषि मूल्य श्रृंखला में प्रत्येक हितधारक के लिए डिज़ाइन किए गए प्रौद्योगिकी समाधान।"
             )}
           </p>
         </div>
-      </div>
+      </section>
       <ProductsSection />
     </div>
   );

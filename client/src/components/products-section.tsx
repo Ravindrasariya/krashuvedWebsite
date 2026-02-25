@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Monitor, Users, TrendingUp, ShoppingBag, Sprout, ExternalLink } from "lucide-react";
 
+
 const products = [
   {
     id: "csm",
@@ -78,9 +79,6 @@ export default function ProductsSection() {
     <section className="py-16 sm:py-20 bg-background" data-testid="products-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 sm:mb-16">
-          <Badge variant="secondary" className="mb-4">
-            {t("Our Solutions", "\u0939\u092E\u093E\u0930\u0947 \u0938\u092E\u093E\u0927\u093E\u0928")}
-          </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-products-title">
             {t("Products", "\u0909\u0924\u094D\u092A\u093E\u0926")}
           </h2>
