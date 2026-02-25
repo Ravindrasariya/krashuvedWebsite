@@ -4,6 +4,7 @@ import { useLanguage } from "@/lib/language-context";
 import { Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import logoImg from "@assets/Gemini_Generated_Image_lu75dlu75dlu75dl(1)_1772042117257.png";
 
 const navItems = [
   { path: "/", labelEn: "Home", labelHi: "\u0939\u094B\u092E" },
@@ -22,14 +23,17 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between gap-4 h-16">
           <Link href="/" data-testid="link-home-logo">
-            <div className="flex items-center gap-2 cursor-pointer">
-              <div className="w-9 h-9 rounded-md bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">K</span>
-              </div>
+            <div className="flex items-center gap-2.5 cursor-pointer">
+              <img src={logoImg} alt="KrashuVed" className="w-10 h-10 object-contain" />
               <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight tracking-tight">KrashuVed</span>
-                <span className="text-[10px] text-muted-foreground leading-none">
-                  {t("Your Trust, Our Priority", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938, \u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u093E\u0925\u092E\u093F\u0915\u0924\u093E")}
+                <span className="font-bold text-xl leading-tight tracking-tight">
+                  <span style={{ color: "#4CAF50" }}>Krashu</span>
+                  <span style={{ color: "#FF9800" }}>Ved</span>
+                </span>
+                <span className="text-[10px] leading-none">
+                  <span style={{ color: "#4CAF50" }}>{t("Your Trust", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938")}</span>
+                  <span className="text-muted-foreground">, </span>
+                  <span style={{ color: "#FF9800" }}>{t("Our Priority", "\u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u093E\u0925\u092E\u093F\u0915\u0924\u093E")}</span>
                 </span>
               </div>
             </div>
