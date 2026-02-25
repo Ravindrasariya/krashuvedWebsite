@@ -1,7 +1,9 @@
+import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/lib/language-context";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Monitor, Users, TrendingUp, ShoppingBag, Sprout, ExternalLink } from "lucide-react";
+import type { ProductImage } from "@shared/schema";
 
 
 const products = [
@@ -74,6 +76,11 @@ const products = [
 
 export default function ProductsSection({ hideHeader = false }: { hideHeader?: boolean }) {
   const { t } = useLanguage();
+  const { data: productImagesList } = useQuery<ProductImage[]>({
+    queryKey: ["/api/product-images"],
+  });
+
+  const imageMap = new Map(productImagesList?.map((p) => [p.id, p.imageUrl]) ?? []);
 
   return (
     <section className="py-16 sm:py-20 bg-background" data-testid="products-section">
@@ -96,6 +103,7 @@ export default function ProductsSection({ hideHeader = false }: { hideHeader?: b
           {products.map((product, index) => {
             const Icon = product.icon;
             const isEven = index % 2 === 0;
+            const productImage = imageMap.get(product.id) || product.image;
 
             return (
               <div
@@ -110,7 +118,7 @@ export default function ProductsSection({ hideHeader = false }: { hideHeader?: b
                     <a href={product.link} target="_blank" rel="noopener noreferrer" className="block" data-testid={`link-product-image-${product.id}`}>
                       <div className="relative rounded-md overflow-hidden group cursor-pointer">
                         <img
-                          src={product.image}
+                          src={productImage}
                           alt={product.nameEn}
                           className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
                         />
@@ -124,7 +132,7 @@ export default function ProductsSection({ hideHeader = false }: { hideHeader?: b
                   ) : (
                     <div className="relative rounded-md overflow-hidden group">
                       <img
-                        src={product.image}
+                        src={productImage}
                         alt={product.nameEn}
                         className="w-full aspect-[4/3] object-cover transition-transform duration-500 group-hover:scale-105"
                       />

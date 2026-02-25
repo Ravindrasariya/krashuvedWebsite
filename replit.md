@@ -27,7 +27,7 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `/products` - Products page
 - `/about` - About Us (premium design with Vision & Mission, KrashuVed Difference pillars)
 - `/contact` - Contact Us (contact cards + feedback form)
-- `/admin` - Admin panel (password-protected) with Banners, Testimonials, Feedback, Analytics tabs
+- `/admin` - Admin panel (password-protected) with Banners, Testimonials, Products, Feedback, Analytics tabs
 
 ## Database Tables
 - `users` - User accounts (varchar UUID primary key)
@@ -35,6 +35,7 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `testimonials` - Customer testimonials (serial primary key)
 - `visitors` - Page visit tracking (serial primary key, ipAddress, userAgent, path, visitedAt)
 - `feedback` - User feedback submissions (serial primary key, name, email, message, createdAt)
+- `product_images` - Product image URLs (text primary key matching product ID, imageUrl)
 
 ## API Endpoints
 - `GET /api/banners` - List active banners
@@ -51,6 +52,8 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `POST /api/feedback` - Submit feedback (public)
 - `GET /api/admin/feedback` - List all feedback
 - `DELETE /api/admin/feedback/:id` - Delete feedback
+- `GET /api/product-images` - List product image URLs
+- `PATCH /api/admin/product-images/:id` - Update product image URL
 
 ## Environment Secrets
 - `ADMIN_PASSWORD` - Password for admin panel access

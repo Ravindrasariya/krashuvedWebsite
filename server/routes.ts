@@ -108,5 +108,20 @@ export async function registerRoutes(
     res.json({ success: true });
   });
 
+  app.get("/api/product-images", async (_req, res) => {
+    const images = await storage.getProductImages();
+    res.json(images);
+  });
+
+  app.patch("/api/admin/product-images/:id", async (req, res) => {
+    const { id } = req.params;
+    const { imageUrl } = req.body;
+    if (!imageUrl || typeof imageUrl !== "string") {
+      return res.status(400).json({ message: "imageUrl is required" });
+    }
+    const result = await storage.upsertProductImage(id, imageUrl);
+    res.json(result);
+  });
+
   return httpServer;
 }

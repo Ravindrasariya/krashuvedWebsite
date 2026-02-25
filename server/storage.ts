@@ -3,7 +3,8 @@ import {
   type Banner, type InsertBanner,
   type Testimonial, type InsertTestimonial,
   type Feedback, type InsertFeedback,
-  users, banners, testimonials, visitors, feedback
+  type ProductImage,
+  users, banners, testimonials, visitors, feedback, productImages
 } from "@shared/schema";
 import { eq, asc, desc, sql, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
@@ -33,6 +34,9 @@ export interface IStorage {
   createFeedback(fb: InsertFeedback): Promise<Feedback>;
   getFeedback(): Promise<Feedback[]>;
   deleteFeedback(id: number): Promise<boolean>;
+
+  getProductImages(): Promise<ProductImage[]>;
+  upsertProductImage(id: string, imageUrl: string): Promise<ProductImage>;
 }
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -133,6 +137,19 @@ export class DatabaseStorage implements IStorage {
   async deleteFeedback(id: number): Promise<boolean> {
     const result = await db.delete(feedback).where(eq(feedback.id, id)).returning();
     return result.length > 0;
+  }
+
+  async getProductImages(): Promise<ProductImage[]> {
+    return db.select().from(productImages);
+  }
+
+  async upsertProductImage(id: string, imageUrl: string): Promise<ProductImage> {
+    const [result] = await db
+      .insert(productImages)
+      .values({ id, imageUrl })
+      .onConflictDoUpdate({ target: productImages.id, set: { imageUrl } })
+      .returning();
+    return result;
   }
 }
 

@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock, MessageCircle } from "lucide-react";
-import type { Banner, Testimonial, Feedback } from "@shared/schema";
+import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock, MessageCircle, ShoppingBag } from "lucide-react";
+import type { Banner, Testimonial, Feedback, ProductImage } from "@shared/schema";
 
 function BannerForm({ onSuccess }: { onSuccess: () => void }) {
   const { toast } = useToast();
@@ -351,6 +351,63 @@ function TestimonialEditRow({ testimonial }: { testimonial: Testimonial }) {
   );
 }
 
+const PRODUCT_NAMES: Record<string, string> = {
+  csm: "Cold Store Manager (CSM)",
+  mandi: "Mandi Mitra",
+  vyappar: "Vyappar Vriddhi",
+  pesticide: "Pesticide Shop",
+  farmer: "Farmer App",
+};
+
+function ProductImageRow({ product }: { product: ProductImage }) {
+  const { toast } = useToast();
+  const [editing, setEditing] = useState(false);
+  const [imageUrl, setImageUrl] = useState(product.imageUrl);
+
+  const updateMutation = useMutation({
+    mutationFn: () => apiRequest("PATCH", `/api/admin/product-images/${product.id}`, { imageUrl }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/product-images"] });
+      toast({ title: "Product image updated" });
+      setEditing(false);
+    },
+  });
+
+  return (
+    <Card className="p-4" data-testid={`admin-product-${product.id}`}>
+      <div className="flex items-center gap-4">
+        <img src={product.imageUrl} alt={PRODUCT_NAMES[product.id] || product.id} className="w-24 h-16 object-cover rounded-md flex-shrink-0" />
+        <div className="flex-1 min-w-0">
+          <p className="font-medium text-sm">{PRODUCT_NAMES[product.id] || product.id}</p>
+          {editing ? (
+            <div className="flex items-center gap-2 mt-1">
+              <Input
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="text-xs h-8"
+                data-testid={`input-product-image-${product.id}`}
+              />
+              <Button size="sm" onClick={() => updateMutation.mutate()} disabled={updateMutation.isPending} data-testid={`button-save-product-${product.id}`}>
+                <Check className="w-4 h-4" />
+              </Button>
+              <Button size="sm" variant="outline" onClick={() => { setEditing(false); setImageUrl(product.imageUrl); }} data-testid={`button-cancel-product-${product.id}`}>
+                <X className="w-4 h-4" />
+              </Button>
+            </div>
+          ) : (
+            <p className="text-muted-foreground text-xs truncate">{product.imageUrl}</p>
+          )}
+        </div>
+        {!editing && (
+          <Button variant="outline" size="icon" onClick={() => setEditing(true)} data-testid={`button-edit-product-${product.id}`}>
+            <Pencil className="w-4 h-4" />
+          </Button>
+        )}
+      </div>
+    </Card>
+  );
+}
+
 function FeedbackRow({ feedback: fb }: { feedback: Feedback }) {
   const { toast } = useToast();
 
@@ -476,6 +533,10 @@ function AdminDashboard() {
     queryKey: ["/api/admin/feedback"],
   });
 
+  const { data: productImagesList, isLoading: loadingProducts } = useQuery<ProductImage[]>({
+    queryKey: ["/api/product-images"],
+  });
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10" data-testid="page-admin">
       <div className="flex items-center justify-between gap-4 mb-8">
@@ -500,6 +561,9 @@ function AdminDashboard() {
           </TabsTrigger>
           <TabsTrigger value="testimonials" className="gap-1.5" data-testid="tab-testimonials">
             <MessageSquare className="w-4 h-4" /> {t("Testimonials", "\u092A\u094D\u0930\u0936\u0902\u0938\u093E\u092A\u0924\u094D\u0930")}
+          </TabsTrigger>
+          <TabsTrigger value="products" className="gap-1.5" data-testid="tab-products">
+            <ShoppingBag className="w-4 h-4" /> {t("Products", "\u0909\u0924\u094D\u092A\u093E\u0926")}
           </TabsTrigger>
           <TabsTrigger value="feedback" className="gap-1.5" data-testid="tab-feedback">
             <MessageCircle className="w-4 h-4" /> {t("Feedback", "\u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E")}
@@ -537,6 +601,23 @@ function AdminDashboard() {
               </div>
             ) : (
               <p className="text-muted-foreground text-sm">{t("No testimonials yet", "\u0905\u092D\u0940 \u0915\u094B\u0908 \u092A\u094D\u0930\u0936\u0902\u0938\u093E\u092A\u0924\u094D\u0930 \u0928\u0939\u0940\u0902")}</p>
+            )}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="products" className="space-y-6">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">{t("Product Images", "\u0909\u0924\u094D\u092A\u093E\u0926 \u091A\u093F\u0924\u094D\u0930")}</h3>
+            {loadingProducts ? (
+              <div className="space-y-3">{[1, 2, 3].map((i) => <Skeleton key={i} className="h-20 rounded-md" />)}</div>
+            ) : productImagesList && productImagesList.length > 0 ? (
+              <div className="space-y-3">
+                {productImagesList.map((p) => (
+                  <ProductImageRow key={p.id} product={p} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-sm">{t("No product images configured", "\u0915\u094B\u0908 \u0909\u0924\u094D\u092A\u093E\u0926 \u091A\u093F\u0924\u094D\u0930 \u0915\u0949\u0928\u094D\u092B\u093C\u093F\u0917\u0930 \u0928\u0939\u0940\u0902")}</p>
             )}
           </div>
         </TabsContent>

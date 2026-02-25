@@ -46,6 +46,11 @@ export const feedback = pgTable("feedback", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const productImages = pgTable("product_images", {
+  id: text("id").primaryKey(),
+  imageUrl: text("image_url").notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -63,3 +68,4 @@ export type Testimonial = typeof testimonials.$inferSelect;
 export type InsertTestimonial = z.infer<typeof insertTestimonialSchema>;
 export type Feedback = typeof feedback.$inferSelect;
 export type InsertFeedback = z.infer<typeof insertFeedbackSchema>;
+export type ProductImage = typeof productImages.$inferSelect;
