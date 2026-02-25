@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertBannerSchema, insertTestimonialSchema } from "@shared/schema";
+import { insertBannerSchema, insertTestimonialSchema, insertFeedbackSchema } from "@shared/schema";
 
 export async function registerRoutes(
   httpServer: Server,
@@ -85,6 +85,27 @@ export async function registerRoutes(
     const total = await storage.getTotalVisitors();
     const uniqueToday = await storage.getUniqueVisitorsToday();
     res.json({ total, uniqueToday });
+  });
+
+  app.post("/api/feedback", async (req, res) => {
+    const parsed = insertFeedbackSchema.safeParse(req.body);
+    if (!parsed.success) {
+      return res.status(400).json({ message: parsed.error.message });
+    }
+    const fb = await storage.createFeedback(parsed.data);
+    res.status(201).json(fb);
+  });
+
+  app.get("/api/admin/feedback", async (_req, res) => {
+    const list = await storage.getFeedback();
+    res.json(list);
+  });
+
+  app.delete("/api/admin/feedback/:id", async (req, res) => {
+    const id = parseInt(req.params.id);
+    const deleted = await storage.deleteFeedback(id);
+    if (!deleted) return res.status(404).json({ message: "Feedback not found" });
+    res.json({ success: true });
   });
 
   return httpServer;

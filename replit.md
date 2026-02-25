@@ -25,15 +25,16 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 ## Pages
 - `/` - Home (banner slider, products, testimonials)
 - `/products` - Products page
-- `/about` - About Us (placeholder)
-- `/contact` - Contact Us
-- `/admin` - Admin panel (password-protected) with Banners, Testimonials, Analytics tabs
+- `/about` - About Us (premium design with Vision & Mission, KrashuVed Difference pillars)
+- `/contact` - Contact Us (contact cards + feedback form)
+- `/admin` - Admin panel (password-protected) with Banners, Testimonials, Feedback, Analytics tabs
 
 ## Database Tables
 - `users` - User accounts (varchar UUID primary key)
 - `banners` - Homepage slider banners (serial primary key)
 - `testimonials` - Customer testimonials (serial primary key)
 - `visitors` - Page visit tracking (serial primary key, ipAddress, userAgent, path, visitedAt)
+- `feedback` - User feedback submissions (serial primary key, name, email, message, createdAt)
 
 ## API Endpoints
 - `GET /api/banners` - List active banners
@@ -47,6 +48,9 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `POST /api/track` - Record a page visit
 - `POST /api/admin/login` - Validate admin password
 - `GET /api/admin/visitors` - Get visitor analytics (total + unique today)
+- `POST /api/feedback` - Submit feedback (public)
+- `GET /api/admin/feedback` - List all feedback
+- `DELETE /api/admin/feedback/:id` - Delete feedback
 
 ## Environment Secrets
 - `ADMIN_PASSWORD` - Password for admin panel access
@@ -72,4 +76,5 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - Colors: Krashu = #4CAF50 (green), Ved = #FF9800 (orange)
 - Phone: +91 888 258 9392
 - Email: info@krashuved.com
+- Address: 172 Divya Vihar, Aurobindo, Jakhya, Bhawarasala, Sanwer, Indore, 453555
 - Product links: csm.krashuved.com, mm.krashuved.com, vv.krashuved.com

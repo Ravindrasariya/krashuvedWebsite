@@ -10,8 +10,8 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock } from "lucide-react";
-import type { Banner, Testimonial } from "@shared/schema";
+import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock, MessageCircle } from "lucide-react";
+import type { Banner, Testimonial, Feedback } from "@shared/schema";
 
 function BannerForm({ onSuccess }: { onSuccess: () => void }) {
   const { toast } = useToast();
@@ -351,6 +351,44 @@ function TestimonialEditRow({ testimonial }: { testimonial: Testimonial }) {
   );
 }
 
+function FeedbackRow({ feedback: fb }: { feedback: Feedback }) {
+  const { toast } = useToast();
+
+  const deleteMutation = useMutation({
+    mutationFn: () => apiRequest("DELETE", `/api/admin/feedback/${fb.id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/admin/feedback"] });
+      toast({ title: "Feedback deleted" });
+    },
+  });
+
+  return (
+    <Card className="p-4" data-testid={`admin-feedback-${fb.id}`}>
+      <div className="flex items-start gap-4">
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-3 mb-1">
+            <p className="font-medium text-sm">{fb.name}</p>
+            <span className="text-muted-foreground text-xs">{fb.email}</span>
+          </div>
+          <p className="text-muted-foreground text-sm leading-relaxed">{fb.message}</p>
+          <p className="text-muted-foreground/60 text-xs mt-2">
+            {fb.createdAt ? new Date(fb.createdAt).toLocaleString() : ""}
+          </p>
+        </div>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={() => deleteMutation.mutate()}
+          disabled={deleteMutation.isPending}
+          data-testid={`button-delete-feedback-${fb.id}`}
+        >
+          <Trash2 className="w-4 h-4" />
+        </Button>
+      </div>
+    </Card>
+  );
+}
+
 function LoginGate({ onLogin }: { onLogin: () => void }) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -434,6 +472,10 @@ function AdminDashboard() {
     queryKey: ["/api/admin/visitors"],
   });
 
+  const { data: feedbackList, isLoading: loadingFeedback } = useQuery<Feedback[]>({
+    queryKey: ["/api/admin/feedback"],
+  });
+
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10" data-testid="page-admin">
       <div className="flex items-center justify-between gap-4 mb-8">
@@ -458,6 +500,9 @@ function AdminDashboard() {
           </TabsTrigger>
           <TabsTrigger value="testimonials" className="gap-1.5" data-testid="tab-testimonials">
             <MessageSquare className="w-4 h-4" /> {t("Testimonials", "\u092A\u094D\u0930\u0936\u0902\u0938\u093E\u092A\u0924\u094D\u0930")}
+          </TabsTrigger>
+          <TabsTrigger value="feedback" className="gap-1.5" data-testid="tab-feedback">
+            <MessageCircle className="w-4 h-4" /> {t("Feedback", "\u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E")}
           </TabsTrigger>
           <TabsTrigger value="analytics" className="gap-1.5" data-testid="tab-analytics">
             <BarChart3 className="w-4 h-4" /> {t("Analytics", "\u090F\u0928\u093E\u0932\u093F\u091F\u093F\u0915\u094D\u0938")}
@@ -492,6 +537,23 @@ function AdminDashboard() {
               </div>
             ) : (
               <p className="text-muted-foreground text-sm">{t("No testimonials yet", "\u0905\u092D\u0940 \u0915\u094B\u0908 \u092A\u094D\u0930\u0936\u0902\u0938\u093E\u092A\u0924\u094D\u0930 \u0928\u0939\u0940\u0902")}</p>
+            )}
+          </div>
+        </TabsContent>
+
+        <TabsContent value="feedback" className="space-y-6">
+          <div>
+            <h3 className="font-semibold text-lg mb-4">{t("User Feedback", "\u0909\u092A\u092F\u094B\u0917\u0915\u0930\u094D\u0924\u093E \u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E")}</h3>
+            {loadingFeedback ? (
+              <div className="space-y-3">{[1, 2].map((i) => <Skeleton key={i} className="h-24 rounded-md" />)}</div>
+            ) : feedbackList && feedbackList.length > 0 ? (
+              <div className="space-y-3">
+                {feedbackList.map((fb) => (
+                  <FeedbackRow key={fb.id} feedback={fb} />
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground text-sm">{t("No feedback yet", "\u0905\u092D\u0940 \u0915\u094B\u0908 \u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E \u0928\u0939\u0940\u0902")}</p>
             )}
           </div>
         </TabsContent>

@@ -2,9 +2,10 @@ import {
   type User, type InsertUser,
   type Banner, type InsertBanner,
   type Testimonial, type InsertTestimonial,
-  users, banners, testimonials, visitors
+  type Feedback, type InsertFeedback,
+  users, banners, testimonials, visitors, feedback
 } from "@shared/schema";
-import { eq, asc, sql, gte } from "drizzle-orm";
+import { eq, asc, desc, sql, gte } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/node-postgres";
 import pg from "pg";
 
@@ -28,6 +29,10 @@ export interface IStorage {
   recordVisit(ipAddress: string, userAgent: string | null, path: string): Promise<void>;
   getTotalVisitors(): Promise<number>;
   getUniqueVisitorsToday(): Promise<number>;
+
+  createFeedback(fb: InsertFeedback): Promise<Feedback>;
+  getFeedback(): Promise<Feedback[]>;
+  deleteFeedback(id: number): Promise<boolean>;
 }
 
 const pool = new pg.Pool({ connectionString: process.env.DATABASE_URL });
@@ -114,6 +119,20 @@ export class DatabaseStorage implements IStorage {
       .from(visitors)
       .where(gte(visitors.visitedAt, todayStart));
     return result?.count ?? 0;
+  }
+
+  async createFeedback(fb: InsertFeedback): Promise<Feedback> {
+    const [created] = await db.insert(feedback).values(fb).returning();
+    return created;
+  }
+
+  async getFeedback(): Promise<Feedback[]> {
+    return db.select().from(feedback).orderBy(desc(feedback.createdAt));
+  }
+
+  async deleteFeedback(id: number): Promise<boolean> {
+    const result = await db.delete(feedback).where(eq(feedback.id, id)).returning();
+    return result.length > 0;
   }
 }
 
