@@ -27,11 +27,11 @@ export default function Navbar() {
               <img src={logoImg} alt="KrashuVed" className="w-10 h-10 object-contain" />
               <div className="flex flex-col">
                 <span className="font-bold text-xl leading-tight tracking-tight">
-                  <span style={{ color: "#4CAF50" }}>Krashu</span>
+                  <span style={{ color: "#388E3C" }}>Krashu</span>
                   <span style={{ color: "#FF9800" }}>Ved</span>
                 </span>
                 <span className="text-[10px] leading-none">
-                  <span style={{ color: "#4CAF50" }}>{t("Your Trust", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938")}</span>
+                  <span style={{ color: "#388E3C" }}>{t("Your Trust", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938")}</span>
                   <span className="text-muted-foreground">, </span>
                   <span style={{ color: "#FF9800" }}>{t("Our Priority", "\u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u093E\u0925\u092E\u093F\u0915\u0924\u093E")}</span>
                 </span>
