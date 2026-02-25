@@ -32,22 +32,27 @@ export default function HeroBanner() {
 
   if (isLoading) {
     return (
-      <div className="relative w-full aspect-[16/6] md:aspect-[16/5]">
-        <Skeleton className="w-full h-full rounded-none" />
+      <div className="px-4 sm:px-6 lg:px-10 pt-4">
+        <div className="relative w-full aspect-[16/9] sm:aspect-[16/8] md:aspect-[16/7]">
+          <Skeleton className="w-full h-full rounded-2xl" />
+        </div>
       </div>
     );
   }
 
   if (!bannerList || bannerList.length === 0) {
     return (
-      <div className="relative w-full aspect-[16/6] md:aspect-[16/5] bg-muted flex items-center justify-center">
-        <p className="text-muted-foreground">No banners available</p>
+      <div className="px-4 sm:px-6 lg:px-10 pt-4">
+        <div className="relative w-full aspect-[16/9] sm:aspect-[16/8] md:aspect-[16/7] bg-muted flex items-center justify-center rounded-2xl">
+          <p className="text-muted-foreground">No banners available</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="relative w-full aspect-[16/9] sm:aspect-[16/7] md:aspect-[16/5] overflow-hidden" data-testid="hero-banner">
+    <div className="px-4 sm:px-6 lg:px-10 pt-4">
+    <div className="relative w-full aspect-[16/9] sm:aspect-[16/8] md:aspect-[16/7] overflow-hidden rounded-2xl" data-testid="hero-banner">
       {bannerList.map((banner, index) => (
         <div
           key={banner.id}
@@ -116,6 +121,7 @@ export default function HeroBanner() {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 }
