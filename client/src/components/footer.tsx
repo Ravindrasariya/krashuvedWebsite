@@ -34,10 +34,12 @@ export default function Footer() {
             <span className="flex items-center gap-1.5 text-background/70">
               <Mail className="w-3.5 h-3.5 text-primary" data-testid="text-footer-email" />info@krashuved.com
             </span>
-            <span className="flex items-center gap-1.5 text-background/70">
-              <MapPin className="w-3.5 h-3.5 text-primary" data-testid="text-footer-address" />{t("India", "\u092D\u093E\u0930\u0924")}
-            </span>
           </div>
+        </div>
+
+        <div className="flex items-center justify-center gap-1.5 text-sm text-background/70 mt-3">
+          <MapPin className="w-3.5 h-3.5 text-primary flex-shrink-0" data-testid="text-footer-address" />
+          <span>{t("172 Divya Vihar, Aurobindo, Jakhya, Bhawarasala, Sanwer, Indore, 453555", "172 \u0926\u093F\u0935\u094D\u092F \u0935\u093F\u0939\u093E\u0930, \u0911\u0930\u094B\u092C\u093F\u0902\u0926\u094B, \u091C\u0916\u094D\u092F\u093E, \u092D\u0935\u0930\u093E\u0938\u0932\u093E, \u0938\u093E\u0902\u0935\u0947\u0930, \u0907\u0902\u0926\u094C\u0930, 453555")}</span>
         </div>
 
         <div className="border-t border-background/10 mt-4 pt-3 text-center">
