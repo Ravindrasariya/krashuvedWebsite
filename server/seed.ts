@@ -78,6 +78,16 @@ export async function seedDatabase() {
 
       log("Seeded 4 testimonials");
     }
+
+    const existingProductImages = await storage.getProductImages();
+    if (existingProductImages.length === 0) {
+      await storage.upsertProductImage("csm", "/images/product-csm.png");
+      await storage.upsertProductImage("mandi", "/images/product-mandi.png");
+      await storage.upsertProductImage("vyappar", "/images/product-vyappar.png");
+      await storage.upsertProductImage("pesticide", "/images/product-pesticide.png");
+      await storage.upsertProductImage("farmer", "/images/product-farmer.png");
+      log("Seeded 5 product images");
+    }
   } catch (error) {
     console.error("Error seeding database:", error);
   }
