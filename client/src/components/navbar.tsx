@@ -65,7 +65,7 @@ export default function Navbar() {
               className="gap-1.5"
             >
               <Globe className="w-4 h-4" />
-              <span className="text-xs font-medium">{lang === "en" ? "HI" : "EN"}</span>
+              <span className="text-xs font-medium">{lang === "en" ? "हिंदी" : "EN"}</span>
             </Button>
 
             <Sheet open={open} onOpenChange={setOpen}>

@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { useLanguage } from "@/lib/language-context";
 import { Phone, Mail, MapPin } from "lucide-react";
+import logoImg from "@assets/Gemini_Generated_Image_lu75dlu75dlu75dl(1)_1772042117257.png";
 
 export default function Footer() {
   const { t } = useLanguage();
@@ -10,7 +11,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="flex flex-wrap items-start justify-between gap-x-10 gap-y-4">
           <div className="flex items-center gap-2">
-            <img src="/images/krashuved-logo.png" alt="KrashuVed" className="w-8 h-8 object-contain brightness-0 invert" />
+            <img src={logoImg} alt="KrashuVed" className="w-8 h-8 object-contain" />
             <div>
               <span className="font-bold text-lg">
                 <span style={{ color: "#4CAF50" }}>Krashu</span>

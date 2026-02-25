@@ -1,0 +1,36 @@
+About Us
+Who We Are
+
+At KrashuVed, we believe that the backbone of our nation—the farmer—deserves a future rooted in certainty, not chance. Based in the heart of India’s agricultural landscape, we are a technology-driven ecosystem dedicated to digitizing and professionalizing the traditional agricultural supply chain.
+
+We don't just build apps; we build bridges. By combining sophisticated digital tools with our unique Krashu Mitra network, we ensure that the benefits of modern technology reach the last mile, transforming how crops are grown, stored, and sold.
+Our Vision & Mission
+
+Our Vision
+To build a world-class, digitally-integrated agricultural ecosystem where every Indian farmer is empowered with data-driven prosperity, transforming traditional farming into a transparent, predictable, and highly profitable enterprise.
+
+Our Mission
+To bridge the gap between technology and the grassroots level by providing a seamless ‘phygital’ platform that connects farmers, merchants, cold storages, and input suppliers. We are committed to replacing manual uncertainty with digital trust—offering real-time insights, financial empowerment, and end-to-end supply chain transparency.
+The KrashuVed Difference
+
+1. A Unified Digital Core
+From the Cold Store Manager (CSM) and Vyapar Vriddhi for merchants to our Mandi Mitra platform, we have created a single digital thread that tracks the journey of produce from the soil to the final sale. This transparency reduces waste and ensures fair pricing for all.
+
+2. The Phygital Approach
+We understand that trust is built on the ground, not just on a screen. Our Krashu Mitras are local professionals who work side-by-side with farmers, providing the human touch needed to navigate the digital transition.
+
+3. Data-Driven Empowerment
+Leveraging AI for disease detection and advanced statistical regression for price forecasting, we give our stakeholders the tools to make informed decisions. We help farmers time their harvest and storage perfectly to maximize their returns.
+
+4. Financial Inclusion
+Through our integrated transaction systems, we are paving the way for structured credit. By digitizing the records of input shops and mandis, we help farmers and small merchants access the formal financial support they need to scale.
+Our Commitment
+
+“Your Trust, Our Priority” We are more than a software company; we are a partner in the farmer's journey. Whether it is ensuring the quality of seeds, optimizing cold storage inventory, or providing real-time market trends, KrashuVed is here to ensure that Indian agriculture is ready for the future.
+Design Tip for the Page:
+
+    Hero Image: Use the "Unified Ecosystem" slider we created earlier as the background for the top of this page.
+
+    Visual Icons: Use clean, minimalist icons for the "Vision," "Mission," and "Four Pillars" sections to keep the "Premium" look.
+
+    Language Toggle: Since you are working in Madhya Pradesh, consider having a "Hindi" toggle button at the top of this page to make it accessible to local stakeholders.
