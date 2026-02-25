@@ -43,7 +43,7 @@ export default function Navbar() {
             {navItems.map((item) => (
               <Link key={item.path} href={item.path}>
                 <span
-                  className={`px-4 py-2 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+                  className={`px-4 py-2 rounded-md text-[0.85rem] font-bold transition-colors cursor-pointer ${
                     location === item.path
                       ? "bg-primary text-primary-foreground"
                       : "text-foreground/80"
@@ -79,7 +79,7 @@ export default function Navbar() {
                   {navItems.map((item) => (
                     <Link key={item.path} href={item.path}>
                       <span
-                        className={`block px-4 py-3 rounded-md text-sm font-medium transition-colors cursor-pointer ${
+                        className={`block px-4 py-3 rounded-md text-[0.85rem] font-bold transition-colors cursor-pointer ${
                           location === item.path
                             ? "bg-primary text-primary-foreground"
                             : "text-foreground/80"
