@@ -72,23 +72,25 @@ const products = [
   },
 ];
 
-export default function ProductsSection() {
+export default function ProductsSection({ hideHeader = false }: { hideHeader?: boolean }) {
   const { t } = useLanguage();
 
   return (
     <section className="py-16 sm:py-20 bg-background" data-testid="products-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-products-title">
-            {t("Products", "\u0909\u0924\u094D\u092A\u093E\u0926")}
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
-            {t(
-              "Empowering agriculture with technology-driven solutions for every stakeholder in the value chain.",
-              "\u092E\u0942\u0932\u094D\u092F \u0936\u094D\u0930\u0943\u0902\u0916\u0932\u093E \u092E\u0947\u0902 \u092A\u094D\u0930\u0924\u094D\u092F\u0947\u0915 \u0939\u093F\u0924\u0927\u093E\u0930\u0915 \u0915\u0947 \u0932\u093F\u090F \u092A\u094D\u0930\u094C\u0926\u094D\u092F\u094B\u0917\u093F\u0915\u0940-\u0938\u0902\u091A\u093E\u0932\u093F\u0924 \u0938\u092E\u093E\u0927\u093E\u0928\u094B\u0902 \u0915\u0947 \u0938\u093E\u0925 \u0915\u0943\u0937\u093F \u0915\u094B \u0938\u0936\u0915\u094D\u0924 \u092C\u0928\u093E\u0928\u093E\u0964"
-            )}
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-12 sm:mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4" data-testid="text-products-title">
+              {t("Products", "\u0909\u0924\u094D\u092A\u093E\u0926")}
+            </h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto text-base sm:text-lg">
+              {t(
+                "Empowering agriculture with technology-driven solutions for every stakeholder in the value chain.",
+                "\u092E\u0942\u0932\u094D\u092F \u0936\u094D\u0930\u0943\u0902\u0916\u0932\u093E \u092E\u0947\u0902 \u092A\u094D\u0930\u0924\u094D\u092F\u0947\u0915 \u0939\u093F\u0924\u0927\u093E\u0930\u0915 \u0915\u0947 \u0932\u093F\u090F \u092A\u094D\u0930\u094C\u0926\u094D\u092F\u094B\u0917\u093F\u0915\u0940-\u0938\u0902\u091A\u093E\u0932\u093F\u0924 \u0938\u092E\u093E\u0927\u093E\u0928\u094B\u0902 \u0915\u0947 \u0938\u093E\u0925 \u0915\u0943\u0937\u093F \u0915\u094B \u0938\u0936\u0915\u094D\u0924 \u092C\u0928\u093E\u0928\u093E\u0964"
+              )}
+            </p>
+          </div>
+        )}
 
         <div className="space-y-20 sm:space-y-28">
           {products.map((product, index) => {

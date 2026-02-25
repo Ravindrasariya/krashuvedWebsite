@@ -27,7 +27,7 @@ export default function Products() {
           </p>
         </div>
       </section>
-      <ProductsSection />
+      <ProductsSection hideHeader />
     </div>
   );
 }
