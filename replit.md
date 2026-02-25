@@ -54,6 +54,7 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `DELETE /api/admin/feedback/:id` - Delete feedback
 - `GET /api/product-images` - List product image URLs
 - `PATCH /api/admin/product-images/:id` - Update product image URL
+- `POST /api/admin/upload` - Upload an image file (multipart form, field: "image", max 10MB, returns { imageUrl })
 
 ## Environment Secrets
 - `ADMIN_PASSWORD` - Password for admin panel access
@@ -73,6 +74,7 @@ KrashuVed is a responsive bilingual (Hindi/English) website for an agricultural 
 - `client/src/components/footer.tsx` - Site footer
 - `client/src/pages/` - Page components (home, products, about, contact, admin)
 - `client/public/images/` - Generated images for banners and products
+- `uploads/` - User-uploaded images via admin panel (served at /uploads/, gitignored)
 
 ## Brand
 - Logo: `client/public/images/krashuved-logo.png`

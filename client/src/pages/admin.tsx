@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient, apiRequest } from "@/lib/queryClient";
 import { useLanguage } from "@/lib/language-context";
@@ -10,8 +10,47 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useToast } from "@/hooks/use-toast";
-import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock, MessageCircle, ShoppingBag } from "lucide-react";
+import { Trash2, Plus, Image, MessageSquare, Pencil, X, Check, BarChart3, Users, Eye, Lock, MessageCircle, ShoppingBag, Upload, Loader2 } from "lucide-react";
 import type { Banner, Testimonial, Feedback, ProductImage } from "@shared/schema";
+
+function ImageUploadButton({ onUploaded }: { onUploaded: (url: string) => void }) {
+  const { toast } = useToast();
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+
+  const handleFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("image", file);
+      const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || "Upload failed");
+      }
+      const data = await res.json();
+      onUploaded(data.imageUrl);
+      toast({ title: "Image uploaded" });
+    } catch (err: any) {
+      toast({ title: "Upload failed", description: err.message, variant: "destructive" });
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  };
+
+  return (
+    <>
+      <input ref={fileRef} type="file" accept="image/*" className="hidden" onChange={handleFile} data-testid="input-file-upload" />
+      <Button type="button" variant="outline" size="sm" disabled={uploading} onClick={() => fileRef.current?.click()} data-testid="button-upload-image">
+        {uploading ? <Loader2 className="w-4 h-4 animate-spin mr-1" /> : <Upload className="w-4 h-4 mr-1" />}
+        {uploading ? "Uploading..." : "Upload"}
+      </Button>
+    </>
+  );
+}
 
 function BannerForm({ onSuccess }: { onSuccess: () => void }) {
   const { toast } = useToast();
@@ -44,13 +83,18 @@ function BannerForm({ onSuccess }: { onSuccess: () => void }) {
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="sm:col-span-2">
-          <Label>Image URL</Label>
-          <Input
-            value={form.imageUrl}
-            onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
-            placeholder="/images/banner1.png"
-            data-testid="input-banner-image"
-          />
+          <Label>Image</Label>
+          <div className="flex items-center gap-2">
+            <Input
+              value={form.imageUrl}
+              onChange={(e) => setForm({ ...form, imageUrl: e.target.value })}
+              placeholder="/images/banner1.png or upload"
+              data-testid="input-banner-image"
+              className="flex-1"
+            />
+            <ImageUploadButton onUploaded={(url) => setForm({ ...form, imageUrl: url })} />
+          </div>
+          {form.imageUrl && <img src={form.imageUrl} alt="Preview" className="mt-2 h-20 object-cover rounded-md" />}
         </div>
         <div>
           <Label>Caption (English)</Label>
@@ -147,8 +191,12 @@ function BannerEditRow({ banner }: { banner: Banner }) {
       <Card className="p-4 space-y-3" data-testid={`admin-banner-edit-${banner.id}`}>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="sm:col-span-2">
-            <Label className="text-xs">Image URL</Label>
-            <Input value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} />
+            <Label className="text-xs">Image</Label>
+            <div className="flex items-center gap-2">
+              <Input value={form.imageUrl} onChange={(e) => setForm({ ...form, imageUrl: e.target.value })} className="flex-1" />
+              <ImageUploadButton onUploaded={(url) => setForm({ ...form, imageUrl: url })} />
+            </div>
+            {form.imageUrl && <img src={form.imageUrl} alt="Preview" className="mt-2 h-16 object-cover rounded-md" />}
           </div>
           <div>
             <Label className="text-xs">Caption (EN)</Label>
@@ -240,8 +288,12 @@ function TestimonialForm({ onSuccess }: { onSuccess: () => void }) {
           <Input value={form.designation} onChange={(e) => setForm({ ...form, designation: e.target.value })} placeholder="e.g., Farmer, Cold Store Manager" data-testid="input-testimonial-designation" />
         </div>
         <div className="sm:col-span-2">
-          <Label>Photo URL (optional)</Label>
-          <Input value={form.photoUrl} onChange={(e) => setForm({ ...form, photoUrl: e.target.value })} placeholder="/images/photo.png" data-testid="input-testimonial-photo" />
+          <Label>Photo (optional)</Label>
+          <div className="flex items-center gap-2">
+            <Input value={form.photoUrl} onChange={(e) => setForm({ ...form, photoUrl: e.target.value })} placeholder="/images/photo.png or upload" data-testid="input-testimonial-photo" className="flex-1" />
+            <ImageUploadButton onUploaded={(url) => setForm({ ...form, photoUrl: url })} />
+          </div>
+          {form.photoUrl && <img src={form.photoUrl} alt="Preview" className="mt-2 h-16 w-16 object-cover rounded-full" />}
         </div>
         <div className="sm:col-span-2">
           <Label>Description (English)</Label>
@@ -308,8 +360,12 @@ function TestimonialEditRow({ testimonial }: { testimonial: Testimonial }) {
             <Input value={form.designation} onChange={(e) => setForm({ ...form, designation: e.target.value })} />
           </div>
           <div className="sm:col-span-2">
-            <Label className="text-xs">Photo URL</Label>
-            <Input value={form.photoUrl} onChange={(e) => setForm({ ...form, photoUrl: e.target.value })} />
+            <Label className="text-xs">Photo</Label>
+            <div className="flex items-center gap-2">
+              <Input value={form.photoUrl} onChange={(e) => setForm({ ...form, photoUrl: e.target.value })} className="flex-1" />
+              <ImageUploadButton onUploaded={(url) => setForm({ ...form, photoUrl: url })} />
+            </div>
+            {form.photoUrl && <img src={form.photoUrl} alt="Preview" className="mt-2 h-12 w-12 object-cover rounded-full" />}
           </div>
           <div className="sm:col-span-2">
             <Label className="text-xs">Description (EN)</Label>
@@ -380,19 +436,25 @@ function ProductImageRow({ product }: { product: ProductImage }) {
         <div className="flex-1 min-w-0">
           <p className="font-medium text-sm">{PRODUCT_NAMES[product.id] || product.id}</p>
           {editing ? (
-            <div className="flex items-center gap-2 mt-1">
-              <Input
-                value={imageUrl}
-                onChange={(e) => setImageUrl(e.target.value)}
-                className="text-xs h-8"
-                data-testid={`input-product-image-${product.id}`}
-              />
-              <Button size="sm" onClick={() => updateMutation.mutate()} disabled={updateMutation.isPending} data-testid={`button-save-product-${product.id}`}>
-                <Check className="w-4 h-4" />
-              </Button>
-              <Button size="sm" variant="outline" onClick={() => { setEditing(false); setImageUrl(product.imageUrl); }} data-testid={`button-cancel-product-${product.id}`}>
-                <X className="w-4 h-4" />
-              </Button>
+            <div className="space-y-2 mt-1">
+              <div className="flex items-center gap-2">
+                <Input
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                  className="text-xs h-8 flex-1"
+                  data-testid={`input-product-image-${product.id}`}
+                />
+                <ImageUploadButton onUploaded={(url) => setImageUrl(url)} />
+              </div>
+              <div className="flex items-center gap-2">
+                {imageUrl && <img src={imageUrl} alt="Preview" className="h-12 object-cover rounded" />}
+                <Button size="sm" onClick={() => updateMutation.mutate()} disabled={updateMutation.isPending} data-testid={`button-save-product-${product.id}`}>
+                  <Check className="w-4 h-4" />
+                </Button>
+                <Button size="sm" variant="outline" onClick={() => { setEditing(false); setImageUrl(product.imageUrl); }} data-testid={`button-cancel-product-${product.id}`}>
+                  <X className="w-4 h-4" />
+                </Button>
+              </div>
             </div>
           ) : (
             <p className="text-muted-foreground text-xs truncate">{product.imageUrl}</p>
