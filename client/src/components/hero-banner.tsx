@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useLanguage } from "@/lib/language-context";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Banner } from "@shared/schema";
 
@@ -18,10 +16,6 @@ export default function HeroBanner() {
 
   const next = useCallback(() => {
     setCurrent((prev) => (prev + 1) % totalSlides);
-  }, [totalSlides]);
-
-  const prev = useCallback(() => {
-    setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
   }, [totalSlides]);
 
   useEffect(() => {
@@ -87,39 +81,18 @@ export default function HeroBanner() {
       ))}
 
       {totalSlides > 1 && (
-        <>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={prev}
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm border-white/20 text-white"
-            data-testid="button-banner-prev"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            onClick={next}
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 bg-white/10 backdrop-blur-sm border-white/20 text-white"
-            data-testid="button-banner-next"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </Button>
-
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" data-testid="banner-indicators">
-            {bannerList.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrent(index)}
-                className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                  index === current ? "bg-white w-8" : "bg-white/50"
-                }`}
-                data-testid={`button-banner-dot-${index}`}
-              />
-            ))}
-          </div>
-        </>
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2" data-testid="banner-indicators">
+          {bannerList.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrent(index)}
+              className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
+                index === current ? "bg-white w-8" : "bg-white/50"
+              }`}
+              data-testid={`button-banner-dot-${index}`}
+            />
+          ))}
+        </div>
       )}
     </div>
     </div>
