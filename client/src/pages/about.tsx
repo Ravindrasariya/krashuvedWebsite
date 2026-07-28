@@ -8,7 +8,7 @@ export default function About() {
     {
       num: "01",
       icon: Layers,
-      color: "#4CAF50",
+      color: "#16a34a",
       titleEn: "A Unified Digital Core",
       titleHi: "\u090F\u0915\u0940\u0915\u0943\u0924 \u0921\u093F\u091C\u093F\u091F\u0932 \u0915\u094B\u0930",
       descEn: "From the Cold Store Manager (CSM) and Vyapar Vriddhi for merchants to our Mandi Mitra platform, we have created a single digital thread that tracks the journey of produce from the soil to the final sale. This transparency reduces waste and ensures fair pricing for all.",
@@ -17,7 +17,7 @@ export default function About() {
     {
       num: "02",
       icon: Users,
-      color: "#FF9800",
+      color: "#f97316",
       titleEn: "The Phygital Approach",
       titleHi: "\u092B\u093F\u091C\u093F\u091F\u0932 \u0926\u0943\u0937\u094D\u091F\u093F\u0915\u094B\u0923",
       descEn: "We understand that trust is built on the ground, not just on a screen. Our Krashu Mitras are local professionals who work side-by-side with farmers, providing the human touch needed to navigate the digital transition.",
@@ -26,7 +26,7 @@ export default function About() {
     {
       num: "03",
       icon: BarChart3,
-      color: "#4CAF50",
+      color: "#16a34a",
       titleEn: "Data-Driven Empowerment",
       titleHi: "\u0921\u0947\u091F\u093E-\u0938\u0902\u091A\u093E\u0932\u093F\u0924 \u0938\u0936\u0915\u094D\u0924\u093F\u0915\u0930\u0923",
       descEn: "Leveraging AI for disease detection and advanced statistical regression for price forecasting, we give our stakeholders the tools to make informed decisions. We help farmers time their harvest and storage perfectly to maximize their returns.",
@@ -35,7 +35,7 @@ export default function About() {
     {
       num: "04",
       icon: Wallet,
-      color: "#FF9800",
+      color: "#f97316",
       titleEn: "Financial Inclusion",
       titleHi: "\u0935\u093F\u0924\u094D\u0924\u0940\u092F \u0938\u092E\u093E\u0935\u0947\u0936\u0928",
       descEn: "Through our integrated transaction systems, we are paving the way for structured credit. By digitizing the records of input shops and mandis, we help farmers and small merchants access the formal financial support they need to scale.",
@@ -46,16 +46,16 @@ export default function About() {
   return (
     <div data-testid="page-about">
       <section className="relative py-24 sm:py-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/8 via-background to-[#FF9800]/8" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#4CAF50]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF9800]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#16a34a]/8 via-background to-[#f97316]/8" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#16a34a]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#f97316]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 tracking-tight leading-tight" data-testid="text-about-title">
             {t("Who ", "\u0939\u092E ")}
             <span className="relative inline-block">
               {t("We Are", "\u0915\u094C\u0928 \u0939\u0948\u0902")}
-              <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#4CAF50] to-[#FF9800]" />
+              <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#16a34a] to-[#f97316]" />
             </span>
           </h1>
           <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed max-w-3xl mx-auto mb-10" data-testid="text-about-intro">
@@ -81,13 +81,13 @@ export default function About() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" data-testid="text-vision-mission-title">
               {t("Our Vision & Mission", "\u0939\u092E\u093E\u0930\u0940 \u0926\u0943\u0937\u094D\u091F\u093F \u0914\u0930 \u092E\u093F\u0936\u0928")}
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#4CAF50] to-[#FF9800] mx-auto mt-4 rounded-full" />
+            <div className="w-16 h-1 bg-gradient-to-r from-[#16a34a] to-[#f97316] mx-auto mt-4 rounded-full" />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div className="relative bg-card rounded-xl p-8 sm:p-10 border border-border hover:shadow-lg transition-shadow duration-300" data-testid="card-vision">
-              <div className="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={{ backgroundColor: "#4CAF50" }} />
-              <div className="w-14 h-14 rounded-xl bg-[#4CAF50]/10 flex items-center justify-center mb-5">
-                <Eye className="w-7 h-7" style={{ color: "#4CAF50" }} />
+              <div className="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={{ backgroundColor: "#16a34a" }} />
+              <div className="w-14 h-14 rounded-xl bg-[#16a34a]/10 flex items-center justify-center mb-5">
+                <Eye className="w-7 h-7" style={{ color: "#16a34a" }} />
               </div>
               <h3 className="text-xl font-bold mb-3">{t("Our Vision", "\u0939\u092E\u093E\u0930\u0940 \u0926\u0943\u0937\u094D\u091F\u093F")}</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -98,9 +98,9 @@ export default function About() {
               </p>
             </div>
             <div className="relative bg-card rounded-xl p-8 sm:p-10 border border-border hover:shadow-lg transition-shadow duration-300" data-testid="card-mission">
-              <div className="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={{ backgroundColor: "#FF9800" }} />
-              <div className="w-14 h-14 rounded-xl bg-[#FF9800]/10 flex items-center justify-center mb-5">
-                <Target className="w-7 h-7" style={{ color: "#FF9800" }} />
+              <div className="absolute top-0 left-0 w-1 h-full rounded-l-xl" style={{ backgroundColor: "#f97316" }} />
+              <div className="w-14 h-14 rounded-xl bg-[#f97316]/10 flex items-center justify-center mb-5">
+                <Target className="w-7 h-7" style={{ color: "#f97316" }} />
               </div>
               <h3 className="text-xl font-bold mb-3">{t("Our Mission", "\u0939\u092E\u093E\u0930\u093E \u092E\u093F\u0936\u0928")}</h3>
               <p className="text-muted-foreground leading-relaxed">
@@ -120,7 +120,7 @@ export default function About() {
             <h2 className="text-3xl sm:text-4xl font-bold tracking-tight" data-testid="text-difference-title">
               {t("The KrashuVed Difference", "KrashuVed \u0915\u093E \u0905\u0902\u0924\u0930")}
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#4CAF50] to-[#FF9800] mx-auto mt-4 rounded-full" />
+            <div className="w-16 h-1 bg-gradient-to-r from-[#16a34a] to-[#f97316] mx-auto mt-4 rounded-full" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             {pillars.map((pillar) => {
@@ -152,18 +152,18 @@ export default function About() {
       </section>
 
       <section className="py-20 sm:py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/5 via-transparent to-[#FF9800]/5" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#16a34a]/5 via-transparent to-[#f97316]/5" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#4CAF50]/15 to-[#FF9800]/15 flex items-center justify-center mx-auto mb-8">
+          <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#16a34a]/15 to-[#f97316]/15 flex items-center justify-center mx-auto mb-8">
             <Quote className="w-8 h-8 text-primary" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold mb-8 tracking-tight" data-testid="text-commitment-title">
             {t("Our Commitment", "\u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u0924\u093F\u092C\u0926\u094D\u0927\u0924\u093E")}
           </h2>
           <p className="text-3xl sm:text-4xl font-bold mb-8">
-            <span style={{ color: "#4CAF50" }}>{t("Your Trust", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938")}</span>
+            <span style={{ color: "#16a34a" }}>{t("Your Trust", "\u0906\u092A\u0915\u093E \u0935\u093F\u0936\u094D\u0935\u093E\u0938")}</span>
             <span className="text-muted-foreground">, </span>
-            <span style={{ color: "#FF9800" }}>{t("Our Priority", "\u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u093E\u0925\u092E\u093F\u0915\u0924\u093E")}</span>
+            <span style={{ color: "#f97316" }}>{t("Our Priority", "\u0939\u092E\u093E\u0930\u0940 \u092A\u094D\u0930\u093E\u0925\u092E\u093F\u0915\u0924\u093E")}</span>
           </p>
           <div className="bg-card border border-border rounded-xl px-8 py-6 shadow-sm">
             <p className="text-muted-foreground text-base sm:text-lg leading-relaxed" data-testid="text-commitment-body">

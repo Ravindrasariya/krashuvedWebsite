@@ -14,8 +14,8 @@ export default function Footer() {
             <img src={logoImg} alt="KrashuVed" className="w-8 h-8 object-contain" />
             <div>
               <span className="font-bold text-lg">
-                <span style={{ color: "#4CAF50" }}>Krashu</span>
-                <span style={{ color: "#FF9800" }}>Ved</span>
+                <span style={{ color: "#16a34a" }}>Krashu</span>
+                <span style={{ color: "#f97316" }}>Ved</span>
               </span>
             </div>
           </div>

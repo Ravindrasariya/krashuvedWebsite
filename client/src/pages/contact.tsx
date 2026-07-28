@@ -31,14 +31,14 @@ export default function Contact() {
       labelEn: "Phone",
       labelHi: "\u092B\u094B\u0928",
       value: "+91 888 258 9392",
-      color: "#4CAF50",
+      color: "#16a34a",
     },
     {
       icon: Mail,
       labelEn: "Email",
       labelHi: "\u0908\u092E\u0947\u0932",
       value: "info@krashuved.com",
-      color: "#FF9800",
+      color: "#f97316",
     },
     {
       icon: MapPin,
@@ -46,23 +46,23 @@ export default function Contact() {
       labelHi: "\u0915\u0949\u0930\u094D\u092A\u094B\u0930\u0947\u091F \u0915\u093E\u0930\u094D\u092F\u093E\u0932\u092F",
       valueEn: "172 Divya Vihar, Aurobindo, Jakhya, Bhawarasala, Sanwer, Indore, 453555",
       valueHi: "172 \u0926\u093F\u0935\u094D\u092F \u0935\u093F\u0939\u093E\u0930, \u0911\u0930\u094B\u092C\u093F\u0902\u0926\u094B, \u091C\u0916\u094D\u092F\u093E, \u092D\u0935\u0930\u093E\u0938\u0932\u093E, \u0938\u093E\u0902\u0935\u0947\u0930, \u0907\u0902\u0926\u094C\u0930, 453555",
-      color: "#4CAF50",
+      color: "#16a34a",
     },
   ];
 
   return (
     <div data-testid="page-contact">
       <section className="relative py-20 sm:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#4CAF50]/8 via-background to-[#FF9800]/8" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-[#4CAF50]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
-        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#FF9800]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#16a34a]/8 via-background to-[#f97316]/8" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#16a34a]/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#f97316]/5 rounded-full blur-3xl translate-y-1/3 -translate-x-1/4" />
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
             {t("Get In ", "\u0938\u0902\u092A\u0930\u094D\u0915 ")}
             <span className="relative inline-block">
               {t("Touch", "\u0915\u0930\u0947\u0902")}
-              <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#4CAF50] to-[#FF9800]" />
+              <span className="absolute -bottom-1 left-0 w-full h-1 rounded-full bg-gradient-to-r from-[#16a34a] to-[#f97316]" />
             </span>
           </h1>
           <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed max-w-2xl mx-auto">
@@ -106,7 +106,7 @@ export default function Contact() {
             <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-2">
               {t("Send Us Your Feedback", "\u0905\u092A\u0928\u0940 \u092A\u094D\u0930\u0924\u093F\u0915\u094D\u0930\u093F\u092F\u093E \u092D\u0947\u091C\u0947\u0902")}
             </h2>
-            <div className="w-16 h-1 bg-gradient-to-r from-[#4CAF50] to-[#FF9800] mx-auto mt-3 rounded-full" />
+            <div className="w-16 h-1 bg-gradient-to-r from-[#16a34a] to-[#f97316] mx-auto mt-3 rounded-full" />
           </div>
           <div className="bg-card rounded-xl border border-border p-8 space-y-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
